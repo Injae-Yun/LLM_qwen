@@ -17,6 +17,7 @@ def main(target_agent="text_agent"):
         # 1. 테스트용 비정형 입력 데이터 (기획서 5페이지 서사 기반)
         # txt 파일 load
         file_path = "data/sample_novel.txt" # utils/data_loader.py의 load_txt 함수로 txt 파일 로드 (예시)
+        #process.GlossaryManager(model, processor, file_path=file_path) # 용어집 추출 테스트
         process.run_text_agent(model, processor, file_path=file_path)
 
     elif target_agent == "vision_agent":
