@@ -26,12 +26,12 @@ class ModelFactory:
         dtype = torch.bfloat16 if cfg['torch_dtype'] == "bfloat16" else torch.float16
 
         print(f"[{agent_name}] {cfg['model_id']} 로딩을 시작합니다...")
-
         if cfg['model_type'] == 'text':
             model = AutoModelForCausalLM.from_pretrained(
                 cfg['model_id'],
-                torch_dtype=dtype,
-                device_map=cfg['device_map']
+                dtype=dtype,
+                device_map=cfg['device_map'],
+                attn_implementation="sdpa"
             )
             tokenizer = AutoTokenizer.from_pretrained(cfg['model_id'])
             return model, tokenizer
@@ -39,8 +39,9 @@ class ModelFactory:
         elif cfg['model_type'] == 'vision':
             model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
                 cfg['model_id'],
-                torch_dtype=dtype,
-                device_map=cfg['device_map']
+                dtype=dtype,
+                device_map=cfg['device_map'],
+                attn_implementation="sdpa"
             )
             processor = AutoProcessor.from_pretrained(cfg['model_id'])
             return model, processor
@@ -49,11 +50,10 @@ class ModelFactory:
             raise ValueError(f"지원하지 않는 모델 타입입니다: {cfg['model_type']}")
 
     @staticmethod
-    def clear_vram(model_obj):
+    def clear_vram():
         """
         16GB VRAM 환경에서 두 모델을 스위칭할 때 메모리 누수를 방지하는 유틸리티
         """
-        del model_obj
         gc.collect()
         torch.cuda.empty_cache()
         print("VRAM 해제 완료.")

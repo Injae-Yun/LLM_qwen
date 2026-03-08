@@ -1,0 +1,11 @@
+# cache files
+*.pyc
+__pycache__/*
+__pycache__/
+.vscode/
+
+# data files
+data/sample_text.txt 
+
+# results
+*.json
