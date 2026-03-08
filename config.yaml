@@ -1,0 +1,15 @@
+# config.yaml
+models:
+  text_agent:
+    model_id: "Qwen/Qwen2.5-7B-Instruct"
+    model_type: "text"
+    torch_dtype: "bfloat16"
+    device_map: "auto"
+    description: "RAG 및 다중 에이전트 텍스트 추론용"
+    
+  vision_agent:
+    model_id: "Qwen/Qwen2.5-VL-7B-Instruct"
+    model_type: "vision"
+    torch_dtype: "bfloat16"
+    device_map: "auto"
+    description: "게임 스크린샷 및 영상 아트 스타일 분석용"
