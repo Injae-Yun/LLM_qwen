@@ -15,6 +15,13 @@
 ## Development Environment
 - GPU: 5060ti - 16GB
 
+## 📝 TODO (Future Works)
+[ ] glossary 결과 검증 절차 추가 (input text 내에 없는 단어 다수 발견)
+[ ] 지식 그래프 내에서도 오류 다수 발견 ()
+
+[ ] LangGraph 기반의 Multi-Agent 상태 유지(Stateful) 라우팅 로직 연동
+[ ] Neo4j 연동을 통한 GraphRAG Cypher 쿼리 파이프라인 통합
+
 
 ## 🚀 Getting Started
 
@@ -25,9 +32,3 @@ conda activate qwen_env
 pip install -r requirements.txt
 ```
 
-## 📝 TODO (Future Works)
-[ ] glossary 결과 검증 절차 추가 (input text 내에 없는 단어 다수 발견)
-[ ] 지식 그래프 내에서도 오류 다수 발견 ()
-
-[ ] LangGraph 기반의 Multi-Agent 상태 유지(Stateful) 라우팅 로직 연동
-[ ] Neo4j 연동을 통한 GraphRAG Cypher 쿼리 파이프라인 통합
