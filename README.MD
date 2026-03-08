@@ -25,7 +25,7 @@ conda activate qwen_env
 pip install -r requirements.txt
 ```
 
-📝 TODO (Future Works)
+## 📝 TODO (Future Works)
 [ ] glossary 결과 검증 절차 추가 (input text 내에 없는 단어 다수 발견)
 [ ] 지식 그래프 내에서도 오류 다수 발견 ()
 
