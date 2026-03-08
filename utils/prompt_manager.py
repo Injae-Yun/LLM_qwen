@@ -49,3 +49,32 @@ The user will provide text which is part {chunk_index} of {total_chunks} of the 
         ]
         
         return messages
+    def get_ner_prompt(raw_text: str) -> list: #개체명 사전 추출 agent용 프롬프트
+        json_schema = {
+            "Glossary": {
+                "Characters": ["Exact character names from text"],
+                "Factions_and_Groups": ["Guilds, organizations, families"],
+                "Races_and_Classes": ["Elves, Warriors, specific job titles"],
+                "Locations": ["Cities, dungeons, specific places"],
+                "Key_Items_and_Concepts": ["Unique weapons, magic terms, specific artifacts"]
+            }
+        }
+
+        system_instruction = f"""You are a strict Named Entity Recognition (NER) Agent for a game IP database.
+Your ONLY task is to extract proper nouns and key terminology from the provided text to build a definitive glossary.
+
+[Extraction Rules]
+1. [EXACT MATCH ONLY] You MUST extract the terms EXACTLY as they appear in the source text. Do not translate them to English. If the text is in Korean, extract the Korean substrings perfectly.
+2. [NO PARAPHRASING] Do not alter, summarize, or explain the terms.
+3. [EXCLUSION] Do not extract generic words (e.g., "sword", "village", "man"). Only extract specific proper nouns or unique IP terminology.
+4. Output ONLY valid JSON adhering strictly to the schema.
+
+[Output JSON Schema]
+{json.dumps(json_schema, indent=2)}"""
+
+        messages = [
+            {"role": "system", "content": system_instruction},
+            {"role": "user", "content": f"Extract the glossary from the following text:\n\n{raw_text}"}
+        ]
+        
+        return messages
